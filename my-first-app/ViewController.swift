@@ -11,18 +11,25 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var songsArray: [Song] = []
+    
+    @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSongsSegue" {
             print("Yes it is")
             let controller = segue.destination as! SearchSongsViewController
             controller.delegate = self
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        super.viewWillAppear(animated)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
