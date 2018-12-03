@@ -13,6 +13,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var songsArray: [Song] = []
     
     @IBOutlet var tableView: UITableView!
+    
+    @IBAction func playSample(sender: UIButton) {
+        let preview = songsArray[sender.tag].previewURL
+        print("preview " + preview!)
+        PlayAudio.getInstance().playSound(with: preview)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +45,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let index: Int = indexPath.row
         songcell.nameSongLabel?.text = songsArray[index].name
         songcell.artistNameLabel?.text = songsArray[index].artistName
+        songcell.albumNameLabel?.text = songsArray[index].albumName
+        songcell.playButton.tag = index
         
         return songcell
     }
